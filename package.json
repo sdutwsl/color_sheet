@@ -1,0 +1,11 @@
+{
+  "name": "color_sheet",
+  "version": "1.0.0",
+  "description": "A\tcrawler to generate css colorsheet",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "sdutwsl",
+  "license": "MIT"
+}
