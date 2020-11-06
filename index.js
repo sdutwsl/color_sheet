@@ -17,7 +17,7 @@ async function get_mdn_colors(){
     const $=cheerio.load(mdn_css_page.data)
     const colors=[]
     let i=0;
-    const table_rows=$("#colors_table tbody tr td").each((index,ele)=>{
+    $("#colors_table tbody tr td").each((index,ele)=>{
         let text=$(ele).text()
         if(-1!==text.indexOf("CSS")||text===""||text==="\n") return ;
         //名称
@@ -42,11 +42,19 @@ async function get_mdn_colors(){
 }
 
 async function get_nippon_colors(){
-
+    const mdn_css_page=await axios.get(NIPPON_COLORS_URL)
+    const $=cheerio.load(mdn_css_page.data)
+    const colors=[]
+    $("#colors li div a").each((index,ele)=>{
+        const name=$(ele).text()
+        console.log(name,$(ele).attr("href"))
+    })
 }
 
 async function run(){
-    const mdn_colors=get_mdn_colors()
+    // const mdn_colors=get_mdn_colors()
+    const nippon_colors=await get_nippon_colors()
+    // console.log(nippon_colors)
 }
 
 run()
