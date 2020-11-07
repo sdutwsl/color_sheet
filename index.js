@@ -52,9 +52,11 @@ async function get_nippon_colors(){
 }
 
 async function run(){
-    // const mdn_colors=get_mdn_colors()
-    const nippon_colors=await get_nippon_colors()
-    // console.log(nippon_colors)
+    const mdn_colors=await get_mdn_colors()
+    // const nippon_colors=await get_nippon_colors()
+    // console.log(mdn_colors)
+    const fs=require("fs")
+    fs.writeFileSync("mdn_color.json",JSON.stringify(mdn_colors))
 }
 
 run()

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Colors</title>
+        <style>
+            table{
+                border-collapse: collapse;
+                margin: auto;
+            }
+            td{
+                border: 1px solid;
+                padding: 0 1em;
+                line-height: 2;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <td>COLOR</td>
+                    <td>CHS</td>
+                    <td>ALIAS</td>
+                    <td>HEX</td>
+                    <td>RGB</td>
+                </tr>
+                <tbody id="color_table_body"></tbody>
+            </thead>
+        </table>
+        <p>
+            10=16;20=32;30=48;40=64;50=80;60=96;70=112;80=128;
+        </p>
+        <p>
+            90=144;a0=160;b0=176;c0=192;d0=208;e0=224;f0=240;ff=255;
+        </p>
+        <template id="template">
+            <tr>
+                <td id="color"></td>
+                <td id="chs"></td>
+                <td id="alias"></td>
+                <td id="hex"></td>
+                <td id="rgb"></td>
+            </tr>
+        </template>
+    </body>
+    <script>
+        fetch("mdn_color.json").then(res=>{
+            res.json().then(json=>{
+                const template=document.querySelector("#template")
+                const td_color=template.content.querySelector("#color")
+                const td_chs=template.content.querySelector("#chs")
+                const td_alias=template.content.querySelector("#alias")
+                const td_hex=template.content.querySelector("#hex")
+                const td_rgb=template.content.querySelector("#rgb")
+                // const tr=template.content.querySelector("tr")
+                const table_body=document.querySelector("#color_table_body")
+                for(let c of json){
+                    // tr.setAttribute("style",`color:${c.hex};`)
+                    td_color.setAttribute("style",`background:${c.hex};width:8em;`)
+                    td_chs.textContent=c.chs
+                    td_alias.textContent=c.eng
+                    td_hex.textContent=c.hex
+                    td_rgb.textContent=c.rgb
+                    let clone =  document.importNode(template.content, true);
+                    table_body.appendChild(clone)
+                }
+            })
+        })
+    </script>
+</html>
